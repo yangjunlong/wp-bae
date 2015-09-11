@@ -1,6 +1,6 @@
 <?php
 /**
- * 百度BAE插件 云存储 和 邮件队列
+ * 百度云存储插件 云存储 和 邮件队列
  * 
  * @license     General Public License
  * @author      Yang,Junlong at 2013-8-22 PM3:55:02 build.
@@ -11,7 +11,7 @@
  * @version    $Id$
  */
 /**
- * Plugin Name: 百度-BAE
+ * Plugin Name: 百度云存储
  * Plugin URI: http://crossyou.cn/wp-bae.html
  * Description: Baidu BAE Plugin for wordpress
  * Version: 1.0.0
@@ -35,8 +35,8 @@ function bae_set_options() {
     $options = array(
         'bucket' => '',
         'bcms'     => '',
-        'ak'     => '',
-        'sk'     => '',
+        'ak'     => '123',
+        'sk'     => '123',
         'upload_path' => '.',
         'upload_url_path' => BCS_HOST
     );
@@ -70,8 +70,8 @@ function bae_get_baidu_bcs(){
     
     $bae_bucket  = attribute_escape($bae_options['bucket']);
     $bae_bcms    = attribute_escape($bae_options['bcms']);
-    $bae_ak      = attribute_escape($bae_options['ak']);
-    $bae_sk      = attribute_escape($bae_options['sk']);
+    $bae_ak      = attribute_escape($bae_options['ak']) || 123;
+    $bae_sk      = attribute_escape($bae_options['sk']) || 123;
     
     if(IS_BAE){
         $bae_ak = getenv ( 'HTTP_BAE_ENV_AK' );
@@ -264,7 +264,7 @@ function bae_plugin_action_links( $links, $file ) {
 add_filter( 'plugin_action_links', 'bae_plugin_action_links', 10, 2 );
 
 function bae_add_setting_page() {
-    add_options_page('BCS Setting', '百度BAE', 8, __FILE__, 'bae_setting_page');
+    add_options_page('BCS Setting', '百度云存储', 8, __FILE__, 'bae_setting_page');
 }
 
 add_action('admin_menu', 'bae_add_setting_page');
@@ -319,7 +319,7 @@ function bae_setting_page() {
 
 <div class="wrap">
     <div id="icon-options-general" class="icon32"><br></div>
-    <h2>百度BAE设置</h2>
+    <h2>百度云存储设置</h2>
     <?php if ($settings_updated):?>
     <div id="setting-error-settings_updated" class="updated settings-error"> 
     <p><strong>设置已保存。</strong></p></div>
